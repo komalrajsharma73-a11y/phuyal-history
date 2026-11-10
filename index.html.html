@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="ne">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="फुयल/फयल जातिको इतिहास, वंशावली, संस्कृति र अनुसन्धानसम्बन्धी अध्ययन सामग्रीको डिजिटल अभिलेखालय।" />
+  <title>फुयलको इतिहास | डिजिटल अनुसन्धान अभिलेखालय</title>
+  <style>
+    :root {
+      --ink: #182b27; --muted: #66756f; --paper: #f7f8f4; --white: #fff;
+      --green: #174d3c; --green-2: #246b52; --gold: #c49a51;
+      --line: #e3e9e3; --shadow: 0 14px 40px rgba(24,43,39,.08);
+      --radius: 18px;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { margin: 0; font-family: system-ui, -apple-system, "Noto Sans Devanagari", "Mangal", sans-serif; color: var(--ink); background: var(--paper); line-height: 1.65; }
+    a { color: inherit; text-decoration: none; }
+    button, input, textarea, select { font: inherit; }
+    .container { width: min(1120px, calc(100% - 40px)); margin-inline: auto; }
+    .topbar { background: var(--green); color: #eaf2ed; font-size: .85rem; padding: 7px 0; }
+    .topbar .container { display:flex; justify-content:space-between; gap:12px; flex-wrap:wrap; }
+    header { background: rgba(255,255,255,.94); border-bottom: 1px solid var(--line); position: sticky; top:0; z-index:10; backdrop-filter: blur(12px); }
+    .nav { min-height: 76px; display:flex; align-items:center; justify-content:space-between; gap:20px; }
+    .brand { display:flex; align-items:center; gap:12px; font-weight:800; font-size:1.12rem; }
+    .brand-mark { width:42px; height:42px; display:grid; place-items:center; border-radius:13px; background:var(--green); color:white; font-size:1.25rem; }
+    .brand small { display:block; font-size:.68rem; color:var(--muted); font-weight:500; letter-spacing:.03em; }
+    .nav-links { display:flex; align-items:center; gap:27px; color:#42544d; font-size:.94rem; }
+    .nav-links a:hover { color:var(--green-2); }
+    .menu-btn { display:none; border:1px solid var(--line); background:white; border-radius:10px; padding:8px 12px; cursor:pointer; }
+    .hero { background: radial-gradient(circle at 85% 20%, rgba(196,154,81,.24), transparent 27%), linear-gradient(120deg,#123d31,#1d6048); color:white; padding:88px 0 82px; overflow:hidden; }
+    .hero-grid { display:grid; grid-template-columns:1.35fr .65fr; align-items:center; gap:48px; }
+    .eyebrow { color:#e9c98e; text-transform:uppercase; letter-spacing:.12em; font-size:.78rem; font-weight:750; }
+    h1 { font-size:clamp(2.2rem,5vw,4.1rem); line-height:1.2; margin:14px 0 18px; letter-spacing:-.035em; }
+    .hero p { color:#e0ebe5; max-width:650px; font-size:1.08rem; margin:0 0 28px; }
+    .actions { display:flex; gap:12px; flex-wrap:wrap; }
+    .btn { display:inline-flex; justify-content:center; align-items:center; gap:8px; padding:11px 19px; border-radius:11px; border:1px solid transparent; cursor:pointer; font-weight:700; transition:.2s; }
+    .btn-primary { background:var(--gold); color:#1e2c25; }
+    .btn-primary:hover { background:#d5b16f; transform:translateY(-1px); }
+    .btn-outline { border-color:rgba(255,255,255,.55); color:white; }
+    .btn-outline:hover { background:rgba(255,255,255,.1); }
+    .hero-note { border:1px solid rgba(255,255,255,.2); background:rgba(255,255,255,.08); border-radius:22px; padding:26px; }
+    .hero-note .big { font-size:2.8rem; color:#edcf99; font-weight:800; line-height:1.2; }
+    .hero-note p { font-size:.92rem; margin:9px 0 0; }
+    section { padding:76px 0; }
+    .section-head { display:flex; justify-content:space-between; align-items:end; gap:24px; margin-bottom:28px; }
+    .kicker { color:var(--green-2); font-size:.78rem; font-weight:800; letter-spacing:.1em; text-transform:uppercase; }
+    h2 { font-size:clamp(1.7rem,3vw,2.45rem); line-height:1.25; margin:6px 0 8px; }
+    .section-head p, .muted { color:var(--muted); margin:0; }
+    .search-row { display:flex; gap:12px; margin:25px 0 22px; }
+    .search-row input, .search-row select, .field input, .field textarea, .field select { width:100%; border:1px solid #dce4dd; background:white; padding:12px 14px; border-radius:10px; outline:none; color:var(--ink); }
+    input:focus, textarea:focus, select:focus { border-color:var(--green-2); box-shadow:0 0 0 3px rgba(36,107,82,.1); }
+    .search-row input { flex:1; }
+    .search-row select { max-width:210px; }
+    .papers { display:grid; grid-template-columns:repeat(3,1fr); gap:18px; }
+    .paper-card { background:white; border:1px solid var(--line); border-radius:var(--radius); padding:22px; box-shadow:0 5px 18px rgba(24,43,39,.035); display:flex; flex-direction:column; min-height:280px; }
+    .paper-card:hover { box-shadow:var(--shadow); transform:translateY(-2px); transition:.2s; }
+    .tag { align-self:flex-start; color:var(--green-2); background:#edf5ef; border-radius:30px; padding:4px 10px; font-size:.75rem; font-weight:750; }
+    .paper-card h3 { font-size:1.12rem; line-height:1.45; margin:14px 0 8px; }
+    .paper-meta { color:var(--muted); font-size:.82rem; margin-bottom:12px; }
+    .paper-card p { color:#586760; font-size:.9rem; margin:0 0 18px; }
+    .paper-actions { margin-top:auto; display:flex; gap:9px; flex-wrap:wrap; }
+    .btn-small { padding:8px 12px; border-radius:9px; font-size:.82rem; background:var(--green); color:white; }
+    .btn-light { padding:8px 12px; border-radius:9px; font-size:.82rem; border:1px solid var(--line); color:var(--green); background:white; }
+    .empty { grid-column:1/-1; padding:30px; text-align:center; color:var(--muted); border:1px dashed #cbd7ce; border-radius:14px; }
+    .about { background:#edf2ec; }
+    .about-grid { display:grid; grid-template-columns:1fr 1fr; gap:45px; align-items:center; }
+    .about-panel { background:white; padding:28px; border-radius:var(--radius); border:1px solid var(--line); }
+    .about-panel ul { padding-left:20px; color:#53635b; margin-bottom:0; }
+    .upload-wrap { display:grid; grid-template-columns:.75fr 1.25fr; gap:38px; align-items:start; }
+    .upload-aside { background:var(--green); color:white; padding:28px; border-radius:var(--radius); }
+    .upload-aside p { color:#dce9e1; }
+    .form-card { background:white; border:1px solid var(--line); border-radius:var(--radius); padding:28px; box-shadow:var(--shadow); }
+    .form-grid { display:grid; grid-template-columns:1fr 1fr; gap:16px; }
+    .field { margin-bottom:16px; }
+    .field label { display:block; font-size:.87rem; font-weight:700; margin-bottom:7px; }
+    .field textarea { min-height:115px; resize:vertical; }
+    .field small { color:var(--muted); display:block; margin-top:6px; }
+    .notice { margin-top:13px; color:var(--muted); font-size:.82rem; }
+    .contact-box { background:white; border:1px solid var(--line); padding:25px; border-radius:var(--radius); display:flex; justify-content:space-between; align-items:center; gap:20px; }
+    footer { background:#102f26; color:#dce9e1; padding:35px 0; }
+    .footer-inner { display:flex; justify-content:space-between; align-items:center; gap:20px; flex-wrap:wrap; }
+    footer p { margin:4px 0; color:#b9cbc1; font-size:.85rem; }
+    footer a { color:#f0d39e; }
+    .toast { position:fixed; right:20px; bottom:20px; background:#173f32; color:white; padding:13px 18px; border-radius:12px; box-shadow:var(--shadow); display:none; z-index:30; max-width:min(420px,calc(100% - 40px)); }
+    @media (max-width:850px) {
+      .hero-grid,.about-grid,.upload-wrap { grid-template-columns:1fr; }
+      .hero-note { max-width:430px; }
+      .papers { grid-template-columns:repeat(2,1fr); }
+      .nav-links { gap:16px; }
+    }
+    @media (max-width:620px) {
+      .container { width:min(100% - 30px,1120px); }
+      .topbar .container { justify-content:center; text-align:center; }
+      .nav { min-height:68px; }
+      .menu-btn { display:block; }
+      .nav-links { display:none; position:absolute; left:0; right:0; top:68px; padding:18px 22px; background:white; border-bottom:1px solid var(--line); flex-direction:column; align-items:flex-start; }
+      .nav-links.open { display:flex; }
+      .hero { padding:64px 0; }
+      section { padding:58px 0; }
+      .papers { grid-template-columns:1fr; }
+      .section-head { display:block; }
+      .search-row { flex-direction:column; }
+      .search-row select { max-width:none; }
+      .form-grid { grid-template-columns:1fr; gap:0; }
+      .contact-box { display:block; }
+      .contact-box .btn { margin-top:14px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="topbar"><div class="container"><span>इतिहास, पहिचान र ज्ञानको संरक्षण</span><span>डिजिटल अनुसन्धान अभिलेखालय</span></div></div>
+  <header>
+    <nav class="container nav" aria-label="मुख्य नेभिगेसन">
+      <a class="brand" href="#home"><span class="brand-mark">फु</span><span>फुयलको इतिहास<small>PHUYAL / FAYAL HISTORY ARCHIVE</small></span></a>
+      <button class="menu-btn" id="menuBtn" aria-label="मेनु खोल्नुहोस्" aria-expanded="false">☰</button>
+      <div class="nav-links" id="navLinks">
+        <a href="#home">गृहपृष्ठ</a><a href="#papers">अनुसन्धान सामग्री</a><a href="#about">हाम्रोबारे</a><a href="#upload">सामग्री पठाउनुहोस्</a><a href="#contact">सम्पर्क</a>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero" id="home">
+      <div class="container hero-grid">
+        <div>
+          <div class="eyebrow">वंशावली • इतिहास • संस्कृति • अनुसन्धान</div>
+          <h1>फुयल/फयल जातिको इतिहास र पहिचानको अभिलेख</h1>
+          <p>फुयल समुदायको ऐतिहासिक पृष्ठभूमि, वंशावली, बसाइँसराइ, सांस्कृतिक अभ्यास तथा समसामयिक अनुसन्धानलाई संकलन, संरक्षण र साझा गर्ने साझा डिजिटल मञ्च।</p>
+          <div class="actions"><a class="btn btn-primary" href="#papers">अनुसन्धान पढ्नुहोस् ↓</a><a class="btn btn-outline" href="#about">परियोजनाबारे जान्नुहोस्</a></div>
+        </div>
+        <div class="hero-note"><div class="big">इतिहास हाम्रो साझा सम्पदा</div><p>मौखिक इतिहास, लिखित स्रोत, पारिवारिक अभिलेख र अनुसन्धानलाई व्यवस्थित रूपमा सुरक्षित राखौँ।</p></div>
+      </div>
+    </section>
+
+    <section id="papers">
+      <div class="container">
+        <div class="section-head"><div><div class="kicker">डिजिटल संग्रह</div><h2>अनुसन्धानपत्र तथा प्रकाशन</h2><p>उपलब्ध अध्ययन सामग्री खोज्नुहोस् र पढ्नुहोस्।</p></div></div>
+        <div class="search-row">
+          <input id="searchInput" type="search" placeholder="शीर्षक, लेखक वा विषय खोज्नुहोस्..." aria-label="अनुसन्धान खोज्नुहोस्" />
+          <select id="categoryFilter" aria-label="विषयअनुसार छान्नुहोस्"><option value="">सबै विषय</option><option>इतिहास</option><option>वंशावली</option><option>संस्कृति</option><option>बसाइँसराइ</option><option>अन्य</option></select>
+        </div>
+        <div class="papers" id="paperList">
+          <article class="paper-card" data-category="इतिहास">
+            <span class="tag">इतिहास</span><h3>फुयल जातिको ऐतिहासिक विवरण र सांस्कृतिक अभ्यास</h3>
+            <div class="paper-meta">लेखक: कोमलराज फुयल · नमुना अभिलेख</div>
+            <p>फुयल समुदायको उत्पत्ति, ऐतिहासिक विकास, वंशपरम्परा र सांस्कृतिक अभ्यासबारे अध्ययनको परिचयात्मक सार।</p>
+            <div class="paper-actions"><button class="btn-small" onclick="showDemoMessage()">PDF / पढ्नुहोस्</button><button class="btn-light" onclick="showAbstract(this)">सारांश</button></div>
+            <p class="abstract-extra" hidden>यो कार्ड वेबसाइटको नमुना सामग्री हो। वास्तविक अनुसन्धानपत्रको PDF, प्रकाशन मिति र प्रमाणित विवरण राखेपछि मात्र यसलाई आधिकारिक अभिलेखका रूपमा प्रकाशित गर्नुहोस्।</p>
+          </article>
+          <article class="paper-card" data-category="वंशावली">
+            <span class="tag">वंशावली</span><h3>फुयल वंशावली र फैलावट: एक ऐतिहासिक तथा समाजशास्त्रीय अध्ययन</h3>
+            <div class="paper-meta">लेखक: अनुसन्धानकर्ता विवरण थप्न बाँकी · नमुना अभिलेख</div>
+            <p>मौखिक इतिहास, पारिवारिक स्मृति र उपलब्ध लिखित स्रोतका आधारमा वंशावली तथा बसाइँसराइको अध्ययन।</p>
+            <div class="paper-actions"><button class="btn-small" onclick="showDemoMessage()">PDF / पढ्नुहोस्</button><button class="btn-light" onclick="showAbstract(this)">सारांश</button></div>
+            <p class="abstract-extra" hidden>यो उदाहरणका लागि राखिएको कार्ड हो। वास्तविक स्रोत र लेखकको स्वीकृति लिएर मात्र सामग्री थप्नुहोस्।</p>
+          </article>
+          <article class="paper-card" data-category="संस्कृति">
+            <span class="tag">संस्कृति</span><h3>फुयल समुदायका सांस्कृतिक अभ्यास र सामाजिक जीवन</h3>
+            <div class="paper-meta">लेखक: अभिलेखमा विवरण थप्न बाँकी · नमुना अभिलेख</div>
+            <p>परम्परा, संस्कार, सामाजिक सम्बन्ध र सांस्कृतिक निरन्तरतासम्बन्धी सम्भावित अनुसन्धान विषय।</p>
+            <div class="paper-actions"><button class="btn-small" onclick="showDemoMessage()">PDF / पढ्नुहोस्</button><button class="btn-light" onclick="showAbstract(this)">सारांश</button></div>
+            <p class="abstract-extra" hidden>यो नमुना कार्ड हो, वास्तविक प्रकाशन होइन। प्रमाणित अनुसन्धान सामग्रीले प्रतिस्थापन गर्नुहोस्।</p>
+          </article>
+        </div>
+        <p class="notice">नोट: माथिका कार्डहरू डिजाइन देखाउन राखिएका नमुना सामग्री हुन्; वास्तविक PDF वा प्रकाशन विवरण होइनन्।</p>
+      </div>
+    </section>
+
+    <section class="about" id="about">
+      <div class="container about-grid">
+        <div><div class="kicker">हाम्रो उद्देश्य</div><h2>समुदायको इतिहासलाई व्यवस्थित रूपमा सुरक्षित गर्ने</h2><p class="muted">‘फुयलको इतिहास’ फुयल/फयल समुदायसँग सम्बन्धित अध्ययन, दस्तावेज, मौखिक परम्परा र अनुसन्धानलाई एउटै पहुँचयोग्य डिजिटल स्थानमा संकलन गर्ने अवधारणामा आधारित अभिलेखालय हो।</p><p class="muted">यस मञ्चले अनुसन्धानकर्ताहरू, परिवारका सदस्यहरू र रुचि राख्ने पाठकहरूबीच ज्ञान आदानप्रदानलाई प्रोत्साहन गर्छ।</p></div>
+        <div class="about-panel"><h3>अभिलेखमा समेटिने विषयहरू</h3><ul><li>ऐतिहासिक उत्पत्ति र वंशावली</li><li>बसाइँसराइ तथा भौगोलिक फैलावट</li><li>मौखिक इतिहास र पारिवारिक अभिलेख</li><li>भाषा, संस्कृति, संस्कार र सामाजिक जीवन</li><li>शैक्षिक अनुसन्धान तथा प्रकाशन</li></ul></div>
+      </div>
+    </section>
+
+    <section id="upload">
+      <div class="container upload-wrap">
+        <div class="upload-aside"><div class="kicker" style="color:#e9c98e">ज्ञान साझा गर्नुहोस्</div><h2>आफ्नो अनुसन्धान पठाउनुहोस्</h2><p>फुयल/फयल इतिहाससँग सम्बन्धित अनुसन्धान, लेख, वंशावली वा दस्तावेज अभिलेखमा समावेश गर्न प्रस्ताव पठाउन सक्नुहुन्छ।</p><p><strong>महत्त्वपूर्ण:</strong> यो नमुना फ्रन्टएन्ड फाराम हो। फाइल वास्तवमै प्राप्त र सुरक्षित गर्न सर्भर, डेटाबेस तथा सुरक्षित फाइल भण्डारण जोड्नुपर्छ।</p></div>
+        <form class="form-card" id="uploadForm">
+          <div class="form-grid">
+            <div class="field"><label for="paperTitle">अनुसन्धानपत्रको शीर्षक *</label><input id="paperTitle" name="title" required placeholder="शीर्षक लेख्नुहोस्" /></div>
+            <div class="field"><label for="author">लेखकको नाम *</label><input id="author" name="author" required placeholder="लेखकको पूरा नाम" /></div>
+            <div class="field"><label for="category">विषय / विधा *</label><select id="category" name="category" required><option value="">छान्नुहोस्</option><option>इतिहास</option><option>वंशावली</option><option>संस्कृति</option><option>बसाइँसराइ</option><option>अन्य</option></select></div>
+            <div class="field"><label for="paperFile">PDF फाइल *</label><input id="paperFile" name="file" type="file" accept=".pdf,application/pdf" required /><small>PDF फाइल मात्र, अधिकतम 10 MB (डेमो जाँच)।</small></div>
+          </div>
+          <div class="field"><label for="abstract">संक्षिप्त सारांश *</label><textarea id="abstract" name="abstract" required placeholder="अनुसन्धानको उद्देश्य, विधि र मुख्य विषय छोटकरीमा लेख्नुहोस्..."></textarea></div>
+          <button class="btn btn-primary" type="submit">समीक्षाका लागि पठाउनुहोस्</button>
+          <p class="notice">फाराम बुझाउँदा यस डेमोले तपाईंको ब्राउजरमै पुष्टि सन्देश देखाउँछ; वेबसाइट सञ्चालकलाई फाइल पठाउँदैन। सार्वजनिक गर्नुअघि सर्भर-साइड अपलोड र सम्पादकीय समीक्षा प्रणाली जडान गर्नुहोस्।</p>
+        </form>
+      </div>
+    </section>
+
+    <section id="contact" style="padding-top:10px">
+      <div class="container">
+        <div class="contact-box"><div><div class="kicker">सम्पर्क</div><h2 style="margin-bottom:5px">सुझाव वा अनुसन्धान सामग्री छ?</h2><p class="muted">सम्पर्क इमेल र संस्थागत विवरण वेबसाइट प्रकाशित गर्नुअघि यहाँ थप्नुहोस्।</p></div><a class="btn btn-primary" href="mailto:your-email@example.com?subject=फुयलको%20इतिहास">इमेल लेख्नुहोस्</a></div>
+      </div>
+    </section>
+  </main>
+
+  <footer><div class="container footer-inner"><div><strong>फुयलको इतिहास</strong><p>इतिहास, पहिचान र ज्ञानको संरक्षणका लागि डिजिटल अभिलेखालय।</p></div><div><p><a href="#home">गृहपृष्ठ</a> · <a href="#papers">अनुसन्धान</a> · <a href="#about">हाम्रोबारे</a> · <a href="#contact">सम्पर्क</a></p><p>© <span id="year"></span> फुयलको इतिहास। सर्वाधिकार सुरक्षित।</p></div></div></footer>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <script>
+    const menuBtn = document.getElementById('menuBtn');
+    const navLinks = document.getElementById('navLinks');
+    menuBtn.addEventListener('click', () => {
+      const open = navLinks.classList.toggle('open');
+      menuBtn.setAttribute('aria-expanded', String(open));
+    });
+    navLinks.querySelectorAll('a').forEach(link => link.addEventListener('click', () => {
+      navLinks.classList.remove('open'); menuBtn.setAttribute('aria-expanded', 'false');
+    }));
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    const searchInput = document.getElementById('searchInput');
+    const categoryFilter = document.getElementById('categoryFilter');
+    function filterPapers() {
+      const query = searchInput.value.trim().toLocaleLowerCase();
+      const category = categoryFilter.value;
+      let visible = 0;
+      document.querySelectorAll('.paper-card').forEach(card => {
+        const matchesText = card.textContent.toLocaleLowerCase().includes(query);
+        const matchesCategory = !category || card.dataset.category === category;
+        card.hidden = !(matchesText && matchesCategory);
+        if (!card.hidden) visible++;
+      });
+      let empty = document.getElementById('emptyMessage');
+      if (!visible && !empty) {
+        empty = document.createElement('div'); empty.id = 'emptyMessage'; empty.className = 'empty';
+        empty.textContent = 'खोजअनुसार कुनै सामग्री भेटिएन।'; document.getElementById('paperList').appendChild(empty);
+      } else if (visible && empty) empty.remove();
+    }
+    searchInput.addEventListener('input', filterPapers);
+    categoryFilter.addEventListener('change', filterPapers);
+
+    function showToast(message) {
+      const toast = document.getElementById('toast');
+      toast.textContent = message; toast.style.display = 'block';
+      window.clearTimeout(showToast.timer);
+      showToast.timer = window.setTimeout(() => toast.style.display = 'none', 4200);
+    }
+    function showDemoMessage() {
+      showToast('यो नमुना बटन हो। वास्तविक PDF फाइल र पढ्ने लिंक जडान गर्नुपर्छ।');
+    }
+    function showAbstract(button) {
+      const extra = button.closest('.paper-card').querySelector('.abstract-extra');
+      extra.hidden = !extra.hidden;
+      button.textContent = extra.hidden ? 'सारांश' : 'सारांश लुकाउनुहोस्';
+    }
+    document.getElementById('uploadForm').addEventListener('submit', event => {
+      event.preventDefault();
+      const file = document.getElementById('paperFile').files[0];
+      if (!file) return showToast('कृपया PDF फाइल छान्नुहोस्।');
+      if (file.type !== 'application/pdf' && !file.name.toLowerCase().endsWith('.pdf')) return showToast('कृपया PDF फाइल मात्र अपलोड गर्नुहोस्।');
+      if (file.size > 10 * 1024 * 1024) return showToast('फाइल 10 MB भन्दा सानो हुनुपर्छ।');
+      showToast('फाराम परीक्षण सफल भयो। यो डेमोले फाइल सर्भरमा पठाएको छैन।');
+      event.target.reset();
+    });
+  </script>
+</body>
+</html>
